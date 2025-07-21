@@ -1,6 +1,5 @@
 # AngularTutorial
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
 
 ## Development server
 
@@ -34,26 +33,44 @@ To build the project run:
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
+## Interview Question
 
-## Running unit tests
+### Q: What is the difference between a property and a variable in Angular?
+```
+ In Angular, a variable is declared inside a method and is used only within that scope. A property, on the other hand, is declared in the class and is accessible throughout the class and also in the template via data binding. We typically use properties to pass data between the component and the view.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+ ngOnInit() {
+  let count = 5; // local variable
+}
 
-```bash
-ng test
+ export class AppComponent {
+  title: string = 'My Angular App'; // property
+}
 ```
 
-## Running end-to-end tests
+### Q:   What’s the difference between dependencies and devDependencies in Angular?
+````
+dependencies are needed to run the app in production, like @angular/core or rxjs. devDependencies are only needed during development or testing, like @angular/cli or typescript.
+````
+### Q: Q: What is interpolation in Angular?
+🔹 What is Interpolation?
+Interpolation in Angular is used to display data from the component class to the template (HTML).
 
-For end-to-end (e2e) testing, run:
+It’s done using double curly braces {{ }}.
 
-```bash
-ng e2e
+```
+# In app.component.ts
+
+export class AppComponent {
+  name: string = 'Rishabh';
+}
+
+# In app.component.html
+<h1>Hello {{ name }}</h1>
+
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
