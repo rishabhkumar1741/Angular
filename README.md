@@ -53,7 +53,7 @@ ng build
 ````
 dependencies are needed to run the app in production, like @angular/core or rxjs. devDependencies are only needed during development or testing, like @angular/cli or typescript.
 ````
-### Q: Q: What is interpolation in Angular?
+### Q: What is interpolation in Angular?
 🔹 What is Interpolation?
 Interpolation in Angular is used to display data from the component class to the template (HTML).
 
@@ -70,7 +70,44 @@ export class AppComponent {
 <h1>Hello {{ name }}</h1>
 
 ```
+### Angular CLI
+| cmd |   Description  | Shorthand    |
+| :---:   | :---: | :---: |
+| npm install -g @angular/cli | This command installs Angular CLI globally   |    |
+| ng generate component my-comp |  Creates a new component  | ng g c my-comp   |
+| ng generate service my-service | 	Creates a new service   | ng g s my-service   |
+| ng generate pipe my-pipe | Creates a new pipe   | 	ng g p my-pipe   |
+| ng build | Builds the app for production in /dist   |    |
+| ng serve | Runs the app locally at localhost:4200   |    |
+| ng version | Shows Angular CLI and project version info   |    |
+|  |    |    |
 
+### Components
+A Component is the basic building block of an Angular application.
+It controls a part of the UI (called a view) and handles the logic for that view.
 
+Each component is a combination of:
+
+- HTML (template)
+
+- CSS (style)
+
+- TypeScript (logic)
+ 
+ ***app.component.ts***
+```
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'My Angular App';
+}
+```
+ ***html.component.html***
+ ```
+ <h1>{{ title }}</h1>
+ ```
 
 ---
