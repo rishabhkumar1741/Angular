@@ -109,5 +109,59 @@ export class AppComponent {
  ```
  <h1>{{ title }}</h1>
  ```
+---
+### 📌 Click Event in Angular ((click))
+Events are user actions like:
+- Click
+
+- Mouseover
+
+- Keypress
+
+- Input
+
+- Submit
+
+Angular allows us to bind to these events using (), called event binding. `` <button (click)="handleClick()">Click Me</button>
+``
+
+🔹 $event Object:
+
+Captures the event details.
+
+Useful to get values like key pressed, input value, etc.
+
+- <input (input)="logInput($event)">
+ ``` 
+logInput(event: any) {
+  console.log(event.target.value);
+}
+ ```
+🔹 Passing Arguments:
+
+You can pass both custom and event data:
+
+- ```<button (click)="greetUser('Rishabh', $event)">Greet</button>```
+
+```
+greetUser(name: string, event: any) {
+  console.log('Hello ' + name);
+}
+```
+
+
+✅ What is (click)?
+It is an event binding in Angular.
+Used to handle the click event of HTML elements like buttons, divs, etc.
+
+-  ``` Syntax: '<button (click)="myFunction()">Click Me </button> ```
+
+***How it works:***
+When the button is clicked, the method ***myFunction()*** in the component gets called.
+
+---
+
+### 
+
 
 ---
