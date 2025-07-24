@@ -1,0 +1,31 @@
+<div class="div-container">
+    Rishabh
+    <div>
+     <button (click)="changeColour('red')">Red</button>
+     <button (click)="changeColour('blue')">Blue</button>
+     <button (click)="changeColour('black')">Black</button>
+     <form #risform (submit)="submitColour(inputcolour.value,$event,risform)"  >
+        <input #inputcolour type="text"  >
+        <button type="submit">Submit</button>
+     </form>
+    
+    </div>
+    @if(colour === 'red')  
+    {
+    <div style="background-color: red;">
+        <h1>Red</h1>
+    </div>
+    }
+    @else if(colour === 'blue')  
+    {
+    <div style="background-color: blue;">
+        <h1>Blue</h1>
+    </div>
+    }
+    @else
+    {
+    <div style="background-color: black;">
+        <h1>black</h1>
+    </div>
+    }
+</div>
