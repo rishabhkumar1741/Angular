@@ -151,6 +151,7 @@ greetUser(name: string, event: any) {
 
 
 ✅ What is (click)?
+
 It is an event binding in Angular.
 Used to handle the click event of HTML elements like buttons, divs, etc.
 
@@ -161,7 +162,68 @@ When the button is clicked, the method ***myFunction()*** in the component gets 
 
 ---
 
-### 
+### 🔹 Template Reference Variable in Angular (#variableName)
 
+✅ What is a Reference Variable?
+- A reference variable is declared using # in the template.
+
+- It refers to a DOM element or a component from the template (HTML).
+
+- It can be used to access values or properties directly in HTML.
+```
+<input #myInput type="text">
+<button (click)="log(myInput.value)">Log Input</button>
+```
+🔹 Use Cases:
+
+| Use Case |   Example  |
+| :---:   | :---: |
+ Get input value | #inputBox, inputBox.value   
+ Access DOM propertiese | #btn, btn.disabled 
+Access component child | <app-child #childRef>, then use childRef.method() 
 
 ---
+
+### 📘 Angular Notes: @if, @else, @switch (New Syntax in Angular 17+)
+Angular 17+ introduced a new control flow syntax to replace old *ngIf, *ngSwitch.
+
+🔹 @if / @else if / @else Syntax:
+```
+@if (age < 18) {
+  <p>You are a minor.</p>
+} @else if (age < 60) {
+  <p>You are an adult.</p>
+} @else {
+  <p>You are a senior.</p>
+}
+```
+🔹 @switch / @case / @default Syntax:
+```
+@switch (user.role) {
+  @case ('admin') {
+    <p>Welcome, Admin!</p>
+  }
+  @case ('user') {
+    <p>Welcome, User!</p>
+  }
+  @default {
+    <p>Role not recognized.</p>
+  }
+}
+```
+----
+
+### 📘 Angular Notes: @for Loop (New Syntax – Angular 17+)
+
+✅ What is @for?
+
+Angular v17+ introduced @for, which replaces *ngFor.
+It’s more readable and powerful.
+
+```
+@for (item of items; track item.id) {
+  <p>{{ item.name }}</p>
+}
+```
+---
+
