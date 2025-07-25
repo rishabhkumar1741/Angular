@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,signal,effect } from '@angular/core';
 
 
 @Component({
@@ -8,17 +8,27 @@ import { Component } from '@angular/core';
   styleUrl: './rishabh.component.css'
 })
 export class RishabhComponent {
-  colour: string = 'red';
+  colour = signal<string>('red');
+  constructor()
+  {
+    effect(()=>{
+      console.log("rishabh");
+      
+      
+    })
+  }
 
+
+
+  
   changeColour(colour: string)
   {
-    this.colour = colour;
+    this.colour.set(colour);
   }
   submitColour(colour:string,event: Event,form: HTMLFormElement)
   {
-    this.colour = colour;
-    console.log('Colour submitted:', event);  
-    console.log('Form submitted:', form);
+    this.colour.set(colour)
+
     event. preventDefault()// Prevent form submission
 
   }

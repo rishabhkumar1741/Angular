@@ -227,3 +227,114 @@ It’s more readable and powerful.
 ```
 ---
 
+### 🧠 What is a Signal?
+
+A signal is a special variable that holds a value and automatically notifies Angular when that value changes, so the UI can update reactively.
+
+✅ Syntax:
+```
+import { signal } from '@angular/core';
+
+let counter = signal(0);  // signal with initial value 0
+
+// Read the signal
+console.log(counter()); // prints: 0
+
+// Update the signal
+counter.set(5);
+
+// Read again
+console.log(counter()); // prints: 5
+```
+🔄 Why use signals?
+
+- ✅ Automatic UI update on value change
+
+- ✅ Cleaner than RxJS for simple cases
+
+- ✅ Lightweight and easy to use
+
+### There are two main types:
+
+ Writable (State) Signals
+- Created using the signal() function.
+
+- Hold a value that can be read, updated, or set manually.
+
+- Typically used for local state that changes over time.
+
+- Example:
+ ```
+import { signal } from '@angular/core';
+
+const count = signal(0); // Writable signal with initial value 0
+count.set(1);            // Update the value
+console.log(count());    // Read the value
+ ```
+  Computed (Derived) Signals
+- Created using the computed() function.
+
+- Read-only: you cannot set their value directly.
+
+- Automatically derive their value from other signals, recalculating when dependencies change.
+```
+import { signal, computed } from '@angular/core';
+
+const x = signal(2);
+const y = signal(3);
+const sum = computed(() => x() + y());
+console.log(sum()); // Outputs 5
+```
+Computed signals are used for calculated values and cannot be updated directly—they reactively follow the state signals they depend on
+
+---
+### 🟢 What is effect() in Angular?
+
+***effect()*** is a reactive function in Angular used with signals to automatically respond to signal changes.
+
+✅ Simple Definition:
+
+effect() runs a block of code automatically whenever the signals inside it change.
+
+🧠 Why is it used?
+
+To track signal changes and perform side effects like:
+- Logging values
+- Calling a function
+- Updating another signal
+- Triggering a service
+
+```
+import { Component, effect, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  template: `<button (click)="increment()">Count</button>`
+})
+export class ExampleComponent {
+  count = signal(0);
+
+  constructor() {
+    effect(() => {
+      console.log('Count is:', this.count()); // runs when count changes
+    });
+  }
+
+  increment() {
+    this.count.set(this.count() + 1);
+  }
+}
+```
+### 🔁 For Loop Contextual Variables in Angular (New Syntax – Angular 17+)
+
+ 🧠 Contextual Variables in @for
+
+These are special variables available inside the @for loop block:
+| Variable |   Meaning  |
+| :---:   | :---: |
+|$index|Current index (starts at 0)|
+|$count|	Total items processed|
+|$first|	true for the first item|
+|$last|	true for the last item|
+|$even|	true if index is even|
+|$odd|	true if index is odd|
