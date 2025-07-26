@@ -9,6 +9,7 @@ import { Component,signal,effect } from '@angular/core';
 })
 export class RishabhComponent {
   colour = signal<string>('red');
+  names = signal<string[]>(['Eve','Rishabh', 'Kumar', 'Singh', 'RKS', 'Nayra Prasad']);
   constructor()
   {
     effect(()=>{

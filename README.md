@@ -1,37 +1,14 @@
 # AngularTutorial
 
+## Table of Contents
+- [Introduction](#what-is-interpolation-in-angular?)
+- [Types of Directives](#types-of-directives)
+- [Component Directive](#component-directive)
+- [Structural Directive](#structural-directive)
+- [Attribute Directive](#attribute-directive)
 
-## Development server
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
 
 ---
 ## Interview Question
@@ -338,3 +315,182 @@ These are special variables available inside the @for loop block:
 |$last|	true for the last item|
 |$even|	true if index is even|
 |$odd|	true if index is odd|
+
+```
+@for (item of items; let $index = $index; let $first = $first; let $last = $last; let $even = $even; let $odd = $odd) {
+  <div>
+    {{ $index }} - {{ item.name }}
+    
+    @if ($first) {
+      <span>[First]</span>
+    }
+
+    @if ($last) {
+      <span>[Last]</span>
+    }
+
+    @if ($even) {
+      <span>[Even]</span>
+    }
+
+    @if ($odd) {
+      <span>[Odd]</span>
+    }
+  </div>
+} @empty {
+  <div>No data available</div>
+}
+```
+---
+### ✅ Two-Way Binding in Angular (Notes Style)
+📌 What is Two-Way Binding?
+
+Two-way binding lets data flow:
+
+- from component → to UI
+
+- from UI → back to component
+
+It keeps the component property and HTML input in sync.
+
+🔄 Syntax
+``` 
+<input [(ngModel)]="username">
+```
+- [( )] → Banana in a box (two-way binding)
+
+- ngModel → Directive that handles syncing
+
+```
+📦 Example
+# ts file
+export class AppComponent {
+  username = 'Rishabh';
+}
+
+# html file 
+<input [(ngModel)]="username">
+<p>Hello, {{ username }}</p>
+```
+- Typing in the input box updates username
+- ``` username changes reflect in the <p> tag-```
+
+⚠️ ngModel requires FormsModule
+
+Make sure to import FormsModule:
+
+``` 
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  imports: [FormsModule]
+})
+export class AppModule {}
+
+```
+-----
+### 🎨 Dynamic Style in Angular
+
+✅ What is Dynamic Styling?
+- Dynamically changing CSS properties of HTML elements using component logic (like variables, conditions, events).
+
+🎯 Apply Basic Dynamic Styling
+- ``` <p [style.color]="'blue'">This is blue text</p> ```
+
+⚡ Dynamic Style with Condition
+```
+#HTML File
+<p [style.color]="isError ? 'red' : 'green'">
+  Conditional color
+</p>
+
+#ts file
+isError = true;
+```
+💬 Interview Question (Example)
+
+Q: What is the difference between ngStyle and [style.property]?
+
+A:
+
+- [style.property] → For a single style.
+
+- ngStyle → For multiple styles.
+```
+<p [ngStyle]="{color: 'red', fontSize: '20px'}">Multiple styles</p>
+```
+---
+### 📌 Directives in Angular
+✅ What is a Directive?
+- Directives are instructions in the DOM.
+- They change the appearance or behavior of elements/components.
+
+📚 Types of Directives
+1. Component Directive
+
+    - A directive with a template.
+    - Basically, every Angular component is a directive.
+
+2. Structural Directive
+
+    - Changes the DOM layout by adding/removing elements.
+
+    - Examples:
+
+      - *ngIf, *ngFor, *ngSwitch
+
+3. Attribute Directive
+
+- Changes the appearance or behavior of an element.
+
+- Example:
+    - ngClass, ngStyle, custom highlight directive
+
+💬 Interview Question
+
+Q: What’s the difference between structural and attribute directives?
+
+A:
+
+- Structural changes layout/structure (*ngIf, *ngFor)
+
+- Attribute changes style/behavior ([ngStyle], [ngClass])
+
+---
+### ✅ Steps to Create a Custom Directive
+1. Generate Directive
+
+    -   ``` ng generate directive highlight ```
+2. Write Logic in Directive
+
+ ``` 
+    // highlight.directive.ts
+import { Directive, ElementRef, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]'  // this is the attribute name to use in HTML
+})
+export class HighlightDirective {
+
+  constructor(private el: ElementRef) {}
+
+  @HostListener('mouseenter') onMouseEnter() {
+    this.el.nativeElement.style.backgroundColor = 'yellow';
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.el.nativeElement.style.backgroundColor = null;
+  }
+
+}
+```
+📌 Usage in HTML
+
+- ``` <p appHighlight>This text will be highlighted on hover!</p>```
+
+🔍 What’s Happening Here?
+
+- @Directive — Defines a custom directive.
+- ElementRef — Gives access to the DOM element.
+- @HostListener — Listens to DOM events (mouseenter, mouseleave) and performs ations.
+---
