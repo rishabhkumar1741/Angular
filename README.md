@@ -1,17 +1,29 @@
 # AngularTutorial
 
 ## Table of Contents
-- [Introduction](#what-is-interpolation-in-angular?)
-- [Types of Directives](#types-of-directives)
-- [Component Directive](#component-directive)
-- [Structural Directive](#structural-directive)
-- [Attribute Directive](#attribute-directive)
+- [Introduction](#introduction)
+- [What is interpolation in Angular](#what-is-interpolation-in-angular)
+- [Angular CLI](#angular-cli)
+- [Components](#components)
+- [📌Click Event in Angular ((click))](#click-event-in-angular-click)
+- [ Template Reference Variable in Angular (#variableName)](#template-reference-variable-in-angular)
+- [📘 Angular : @if, @else, @switch (New Syntax in Angular 17+)](#angular-notes-if-else-switch-new-syntax-in-angular-17)
+- [📘 Angular : @for Loop (New Syntax – Angular 17+)](#angular-notes-for-loop-new-syntax)
+- [🧠 What is a Signal?](#what-is-a-signal)
+- [What is effect() in Angular?](#what-is-effect-in-angular)
+- [🔁 For Loop Contextual Variables in Angular](#for-loop-contextual-variables-in-angular)
+- [✅ Two-Way Binding in Angular](#two-way-binding-in-angular)
+- [ 🎨 Dynamic Style in Angular](#dynamic-style-in-angular)
+- [📌 Directives in Angular](#directives-in-angular)
 
 
 
 
 ---
-## Interview Question
+### Introduction
+Angular is a front-end web framework developed by Google.
+It is used to build single-page applications (SPAs) using HTML, CSS, and TypeScript.
+Angular is component-based, supports two-way data binding, dependency injection, and modular development.
 
 ### Q: What is the difference between a property and a variable in Angular?
 ```
@@ -30,7 +42,7 @@
 ````
 dependencies are needed to run the app in production, like @angular/core or rxjs. devDependencies are only needed during development or testing, like @angular/cli or typescript.
 ````
-### Q: What is interpolation in Angular?
+## What is interpolation in Angular
 🔹 What is Interpolation?
 Interpolation in Angular is used to display data from the component class to the template (HTML).
 
@@ -87,7 +99,7 @@ export class AppComponent {
  <h1>{{ title }}</h1>
  ```
 ---
-### 📌 Click Event in Angular ((click))
+### Click Event in Angular ((click))
 Events are user actions like:
 - Click
 
@@ -139,7 +151,7 @@ When the button is clicked, the method ***myFunction()*** in the component gets 
 
 ---
 
-### 🔹 Template Reference Variable in Angular (#variableName)
+### Template Reference Variable in Angular
 
 ✅ What is a Reference Variable?
 - A reference variable is declared using # in the template.
@@ -161,7 +173,7 @@ Access component child | <app-child #childRef>, then use childRef.method()
 
 ---
 
-### 📘 Angular Notes: @if, @else, @switch (New Syntax in Angular 17+)
+### Angular Notes: @if, @else, @switch (New Syntax in Angular 17+)
 Angular 17+ introduced a new control flow syntax to replace old *ngIf, *ngSwitch.
 
 🔹 @if / @else if / @else Syntax:
@@ -190,7 +202,7 @@ Angular 17+ introduced a new control flow syntax to replace old *ngIf, *ngSwitch
 ```
 ----
 
-### 📘 Angular Notes: @for Loop (New Syntax – Angular 17+)
+### Angular Notes: @for Loop (New Syntax)
 
 ✅ What is @for?
 
@@ -204,7 +216,7 @@ It’s more readable and powerful.
 ```
 ---
 
-### 🧠 What is a Signal?
+### What is a Signal
 
 A signal is a special variable that holds a value and automatically notifies Angular when that value changes, so the UI can update reactively.
 
@@ -265,7 +277,7 @@ console.log(sum()); // Outputs 5
 Computed signals are used for calculated values and cannot be updated directly—they reactively follow the state signals they depend on
 
 ---
-### 🟢 What is effect() in Angular?
+### What is effect() in Angular
 
 ***effect()*** is a reactive function in Angular used with signals to automatically respond to signal changes.
 
@@ -302,7 +314,7 @@ export class ExampleComponent {
   }
 }
 ```
-### 🔁 For Loop Contextual Variables in Angular (New Syntax – Angular 17+)
+### For Loop Contextual Variables in Angular
 
  🧠 Contextual Variables in @for
 
@@ -342,7 +354,7 @@ These are special variables available inside the @for loop block:
 }
 ```
 ---
-### ✅ Two-Way Binding in Angular (Notes Style)
+### Two-Way Binding in Angular
 📌 What is Two-Way Binding?
 
 Two-way binding lets data flow:
@@ -389,7 +401,7 @@ export class AppModule {}
 
 ```
 -----
-### 🎨 Dynamic Style in Angular
+### Dynamic Style in Angular
 
 ✅ What is Dynamic Styling?
 - Dynamically changing CSS properties of HTML elements using component logic (like variables, conditions, events).
@@ -420,7 +432,7 @@ A:
 <p [ngStyle]="{color: 'red', fontSize: '20px'}">Multiple styles</p>
 ```
 ---
-### 📌 Directives in Angular
+### Directives in Angular
 ✅ What is a Directive?
 - Directives are instructions in the DOM.
 - They change the appearance or behavior of elements/components.
