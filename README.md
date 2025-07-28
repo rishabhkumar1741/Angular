@@ -15,6 +15,10 @@
 - [✅ Two-Way Binding in Angular](#two-way-binding-in-angular)
 - [ 🎨 Dynamic Style in Angular](#dynamic-style-in-angular)
 - [📌 Directives in Angular](#directives-in-angular)
+- [✅ Steps to Create a Custom Directive](#steps-to-create-a-custom-directive)
+- [📍 Basic Routing in Angular](#basic-routing-in-angular)
+- [🔗 routerLinkActive vs ⚙️ routerLinkActiveOptions in Angular](#routerlinkactive-vs-routerlinkactiveoptions-in-angular)
+- [🚫 404 Page in Angular](#-404-page-in-angular)
 
 
 
@@ -469,7 +473,7 @@ A:
 - Attribute changes style/behavior ([ngStyle], [ngClass])
 
 ---
-### ✅ Steps to Create a Custom Directive
+### Steps to Create a Custom Directive
 1. Generate Directive
 
     -   ``` ng generate directive highlight ```
@@ -506,3 +510,118 @@ export class HighlightDirective {
 - ElementRef — Gives access to the DOM element.
 - @HostListener — Listens to DOM events (mouseenter, mouseleave) and performs ations.
 ---
+
+## Basic Routing in Angular
+
+✅ 1. What is Routing?
+
+Routing in Angular means navigating from one page/component to another without reloading the full web page.
+
+It's used in Single Page Applications (SPA) to switch views without refreshing the browser.
+
+Example:
+When you go from /home to /about, only the component changes—not the whole page.
+
+✅ 2. Make Some Components for Pages
+
+Before using routes, you need to create different components for your pages.
+Each route will point to one component.
+
+Example commands:
+```
+ng generate component home
+ng generate component about
+ng g c contact
+```
+These components will be shown based on the route path.
+
+✅ Step 3: Create the routing file (e.g., app.routes.ts)
+```
+// app.routes.ts
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+
+export const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+];
+```
+✅ Step 4: Register router in main.ts
+```
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(routes)],
+});
+```
+✅ Step 5: ``` Add <router-outlet /> in AppComponent ```
+
+```
+<!-- app.component.html -->
+<nav>
+  <a routerLink="/home">Home</a>
+  <a routerLink="/about">About</a>
+</nav>
+
+<router-outlet></router-outlet>
+```
+---
+
+## routerLinkActive vs routerLinkActiveOptions in Angular
+
+✅ What is routerLinkActive?
+- It adds a CSS class to the link when the route is active.
+- Helps to highlight the current page (like a menu tab).
+
+🔹 Basic Usage
+``` <a routerLink="/home" routerLinkActive="active-link">Home</a> ``` 
+
+🟣 When the /home route is active, the class active-link will be applied to the link.
+
+💡 Style Example
+```
+.active-link {
+  font-weight: bold;
+  color: #ff0066;
+  border-bottom: 2px solid #ff0066;
+}
+```
+
+###  ⚙️ routerLinkActiveOptions
+✅ What is routerLinkActiveOptions?
+
+- It tells Angular how strictly to check the match.
+- Default: { exact: false } – partial match also works.
+- Use { exact: true } to apply the class only if the route exactly mtches.
+
+🔹 Example with exact: true
+```
+<a
+  routerLink="/home"
+  routerLinkActive="active-link"
+  [routerLinkActiveOptions]="{ exact: true }"
+>
+  Home
+</a>
+```
+🟡 In this case:
+
+- The class is only applied when the route is exactly /home.
+- If you're at /home/details, it won't apply.
+
+🧠 Interview Tip
+
+Q: Why use routerLinkActiveOptions with exact: true?
+
+A: To avoid applying the active class when nested routes are active (e.g., /home/details). It keeps the UI clean and prevents highlighting parent links unnecessarily.
+
+---
+
+### 🚫 404 Page in Angular
+
+wfjihel
