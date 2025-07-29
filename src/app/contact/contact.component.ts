@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component , inject} from '@angular/core';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-contact',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
+  private router: Router = inject(Router);
+  // user:'Rishabh Kumar'
+  username:any|undefined=undefined;
 
+  constructor()
+  {
+    this.username = this.router.getCurrentNavigation()?.extras.state;
+
+  }
 }

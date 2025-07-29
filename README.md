@@ -19,6 +19,8 @@
 - [📍 Basic Routing in Angular](#basic-routing-in-angular)
 - [🔗 routerLinkActive vs ⚙️ routerLinkActiveOptions in Angular](#routerlinkactive-vs-routerlinkactiveoptions-in-angular)
 - [🚫 404 Page in Angular](#-404-page-in-angular)
+- [🔄 Pass Data from One Page to Other in Angular](#-pass-data-from-one-page-to-other-in-angular)
+
 
 
 
@@ -624,4 +626,93 @@ A: To avoid applying the active class when nested routes are active (e.g., /home
 
 ### 🚫 404 Page in Angular
 
-wfjihel
+✅ What is a 404 Page?
+
+- A 404 page (or Page Not Found) is shown when a user navigates to a non-existent route.
+
+- It improves user experience by guiding users when they enter the wrong URL.
+
+🧱 Step 1: Create a 404 Component
+  - ng generate component page-not-found
+
+🗺️ Step 2: Add Routing for 404
+```
+const routes: Routes = [
+  // your other routes here
+
+  // Wildcard route (MUST BE LAST)
+  { path: '**', component: PageNotFoundComponent }
+];
+```
+🌟 Step 3: Add Content to 404 Component
+```
+<h1>404 - Page Not Found</h1>
+<p>Sorry, the page you're looking for doesn't exist.</p>
+<a routerLink="/">Go back to Home</a>
+```
+🔒 Why is the wildcard route added last?
+
+Because Angular matches routes in order, and if you put ** at the top, it will catch all routes (even the correct ones). So keep it at the end.
+
+🎯 Interview Question
+
+Q: What is the use of the wildcard route (**) in Angular?
+
+A: It is used to catch all undefined routes and typically redirects users to a 404 Page Not Found component.
+
+---
+### 🔄 Pass Data from One Page to Other in Angular
+
+1. 📌 Pass Data using routerLink
+
+Use [routerLink] and state to send data to another component/page:
+
+  - <a [routerLink]="['/details']" [state]="{ name: 'Rishabh', age: 25 }">Go to Details</a> 
+
+Then in the receiving component:
+```
+import { Router } from '@angular/router';
+
+constructor(private router: Router) {
+  const navigation = this.router.getCurrentNavigation();
+  const stateData = navigation?.extras.state;
+  console.log(stateData); // { name: 'Rishabh', age: 25 }
+}
+```
+2. 📌 Pass Data using Button Click
+
+In component:
+```
+navigateToDetails() {
+  this.router.navigate(['/details'], { state: { message: 'Hello from Home!' } });
+}
+```
+In template:
+```
+<button (click)="navigateToDetails()">Go with Data</button>
+```
+3. 📌 Pass Data using ActivatedRoute (Query Params)
+
+Sender Component:
+```
+this.router.navigate(['/details'], {
+  queryParams: { name: 'Rishabh', age: 25 }
+});
+```
+Receiver Component:
+```
+import { ActivatedRoute } from '@angular/router';
+
+constructor(private route: ActivatedRoute) {
+  this.route.queryParams.subscribe(params => {
+    console.log(params); // { name: 'Rishabh', age: '25' }
+  });
+}
+```
+💡 Interview Tip:
+
+routerLink + state is best for internal data passing (non-URL).
+
+queryParams are visible in the URL and good for shareable links.
+
+---
