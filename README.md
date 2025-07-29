@@ -20,6 +20,8 @@
 - [🔗 routerLinkActive vs ⚙️ routerLinkActiveOptions in Angular](#routerlinkactive-vs-routerlinkactiveoptions-in-angular)
 - [🚫 404 Page in Angular](#-404-page-in-angular)
 - [🔄 Pass Data from One Page to Other in Angular](#-pass-data-from-one-page-to-other-in-angular)
+- [📦 What are Observables and subscribe()](#-what-are-observables-and-subscribe-in-angular)
+
 
 
 
@@ -515,6 +517,12 @@ export class HighlightDirective {
 
 ## Basic Routing in Angular
 
+- RouterOutlet, => Displays the component based on the current route.
+- RouterLink,   => Used in HTML to navigate to a route.
+- Router,        => A service to navigate between routes in TypeScript code.
+- ActivatedRoute =>  Gives access to route data like params and query params.
+
+
 ✅ 1. What is Routing?
 
 Routing in Angular means navigating from one page/component to another without reloading the full web page.
@@ -714,5 +722,45 @@ constructor(private route: ActivatedRoute) {
 routerLink + state is best for internal data passing (non-URL).
 
 queryParams are visible in the URL and good for shareable links.
+
+---
+
+## 📦 What are Observables and subscribe() in Angular
+
+📦 What is an Observable?
+
+An Observable is like a box that holds data, and it gives you the data when it's ready — either now or later.
+
+You can think of it like YouTube live:
+
+- The stream (video) = Observable
+
+- You (watching) = subscriber
+
+- You subscribe to the video to watch it live (get updates as it happens)
+
+✅ What is subscribe()?
+
+subscribe() means “start listening” to that data.
+
+You use it to:
+
+- Get data from an API
+
+- React when a user types something
+
+- Track route changes in the app
+```
+this.http.get('https://api.com/users')
+  .subscribe(data => {
+    console.log(data); // You got the data from the server!
+  });
+```
+
+Explanation:
+
+- .get() gives you an Observable
+
+- .subscribe() lets you receive the data from it
 
 ---
