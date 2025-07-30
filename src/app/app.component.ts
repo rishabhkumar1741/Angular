@@ -22,7 +22,7 @@ export class AppComponent {
   }
   moveToContactPage()
   {
-    this.router.navigate(['/contact'],{state:{user:'Rishabh Kumar'},queryParams:{phonenumber:9910561642}});
+    this.router.navigate(['/contact'],{queryParams:{phonenumber:9910561642}});
   }
    
 

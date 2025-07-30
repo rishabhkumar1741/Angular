@@ -21,6 +21,7 @@
 - [🚫 404 Page in Angular](#-404-page-in-angular)
 - [🔄 Pass Data from One Page to Other in Angular](#-pass-data-from-one-page-to-other-in-angular)
 - [📦 What are Observables and subscribe()](#-what-are-observables-and-subscribe-in-angular)
+- [🚦 Dynamic Routing](#-dynamic-routing-in-angular)
 
 
 
@@ -764,3 +765,68 @@ Explanation:
 - .subscribe() lets you receive the data from it
 
 ---
+
+## 🚦 Dynamic Routing in Angular
+
+✅ What is Dynamic Routing?
+
+Dynamic Routing allows us to pass dynamic parameters (like userId, productId, etc.) in the URL and load the data or content accordingly.
+
+For example:
+- /user/10 → Load data for user with ID 10
+- /product/23 → Load product details of product ID 23
+
+🧱 1. Make Component
+
+Create a component that will receive dynamic data:
+
+``` ng generate component user-details ```
+
+🛣️ 2. Make Dynamic Route
+
+Define a route with a dynamic parameter using :paramName in your app-routing.module.ts:
+```
+const routes: Routes = [
+  { path: 'user/:id', component: UserDetailsComponent }
+];
+```
+🔗 3. Make Dynamic Links
+
+Use [routerLink] to generate dynamic links from your template:
+
+- ``` <a [routerLink]="['/user', userId]">View User</a> ```
+
+Or loop through users dynamically:
+```
+<div *ngFor="let user of users">
+  <a [routerLink]="['/user', user.id]">{{ user.name }}</a>
+</div>
+```
+📦 4. Read the Route Parameter in Component
+
+Inside your component, use ActivatedRoute to get the id:
+```
+import { ActivatedRoute } from '@angular/router';
+
+constructor(private route: ActivatedRoute) {}
+
+ngOnInit() {
+  const id = this.route.snapshot.paramMap.get('id');
+  console.log('User ID:', id);
+}
+```
+If you want to react to changes dynamically (e.g., route param changes without reload):
+
+```
+this.route.paramMap.subscribe(params => {
+  const id = params.get('id');
+  console.log('User ID:', id);
+});
+```
+❓ Interview Tip
+
+ Q: What is dynamic routing in Angular?
+
+ A: It allows navigation to routes with variable segments (e.g., user/:id), useful for detail pages like product or user profiles.
+
+ --
