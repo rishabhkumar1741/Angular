@@ -22,6 +22,8 @@
 - [🔄 Pass Data from One Page to Other in Angular](#-pass-data-from-one-page-to-other-in-angular)
 - [📦 What are Observables and subscribe()](#-what-are-observables-and-subscribe-in-angular)
 - [🚦 Dynamic Routing](#-dynamic-routing-in-angular)
+- [📝 Angular Forms](#-angular-forms)
+
 
 
 
@@ -830,3 +832,147 @@ this.route.paramMap.subscribe(params => {
  A: It allows navigation to routes with variable segments (e.g., user/:id), useful for detail pages like product or user profiles.
 
  --
+
+ 📝 Angular Forms
+
+ Angular provides two main approaches for handling forms:
+
+ 1. Template-driven Forms (Simple, good for small apps)
+    - Uses HTML and Angular directives (ngModel)
+    - Logic stays in the template
+    - Automatic two-way data binding
+    - Validation is handled in the template
+
+📌 Example:
+
+```
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+  <input name="username" ngModel required />
+</form>
+```
+2. Reactive Forms (More powerful, better for complex forms)
+    - Uses FormGroup, FormControl in TypeScript
+    - Logic is in the component class
+    - Explicit and more scalable
+    - Better for custom validation and dynamic form
+ ```
+form = new FormGroup({
+  username: new FormControl('', Validators.required)
+});
+```
+```
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="username" />
+</form>
+```
+✅ Form Grouping in Reactive Forms
+
+🔹 1. Why to use FormGroup?
+  - Groups multiple form controls into one unit.
+  - Helps organize complex forms (likeregistration, address).
+  - Makes validation and data access easier
+
+  🔹 2. Make HTML Form with FormGroup
+
+- In the HTML file, use [formGroup] to bind the group and formControlName for each input:
+
+```
+<form [formGroup]="userForm">
+  <input formControlName="name" />
+  <input formControlName="email" />
+</form>
+```
+🔹 3. Make FormGroup in TypeScript
+
+In the component:
+```
+import { FormGroup, FormControl } from '@angular/forms';
+
+userForm = new FormGroup({
+  name: new FormControl(''),
+  email: new FormControl('')
+});
+```
+🔹 4. Get Value from Input Fields
+``` 
+console.log(this.userForm.value);  // { name: '...', email: '...' } 
+```
+🔹 5. Set Value in Input Field
+
+```
+this.userForm.patchValue({
+  name: 'Rishabh'
+});
+```
+🔹 6. Set Default Value
+```
+userForm = new FormGroup({
+  name: new FormControl('Rishabh'),
+  email: new FormControl('rishabh@example.com')
+});
+```
+🔹 7. Interview Questions (Sample) 
+- What is the difference between FormGroup and FormControl?
+- How to set and get values from a FormGroup?
+- When would you use patchValue() vs setValue()?
+- How to validate nested FormGroup?
+
+✅ Form Grouping in Reactive Forms (with Validations)
+
+🔹 2. Create HTML Form with FormGroup
+```
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <input formControlName="name" placeholder="Name" />
+  <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+    Name is required
+  </div>
+
+  <input formControlName="email" placeholder="Email" />
+  <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+    Enter a valid email
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Submit</button>
+</form>
+```
+🔹 3. Create FormGroup with Validations in TypeScript
+```
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+userForm = new FormGroup({
+  name: new FormControl('', Validators.required),
+  email: new FormControl('', [Validators.required, Validators.email])
+});
+```
+🔹 4. Get Value from Form
+- console.log(this.userForm.value);
+
+🔹 5. Set Value
+```
+this.userForm.patchValue({
+  name: 'Rishabh'
+});
+```
+🔹 6. Set Default Value
+```
+userForm = new FormGroup({
+  name: new FormControl('Rishabh', Validators.required),
+  email: new FormControl('rishabh@mail.com', Validators.email)
+});
+```
+🔹 7. Common Validators in Angular
+
+| Variable |   Meaning  |
+| :---:   | :---: |
+|Validators.required |Field cannot be empty|
+|Validators.email|Must be a valid email|
+|Validators.minLength(n)|Minimum n characters|
+|Validators.maxLength(n)|	Maximum n characters|
+|Validators.pattern('regex')|Custom pattern|
+
+🔹 8. Check Form Validity in Code
+```
+if (this.userForm.valid) {
+  // submit data
+}
+```

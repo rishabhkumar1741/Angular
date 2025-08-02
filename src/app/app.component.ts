@@ -13,16 +13,23 @@ export class AppComponent {
   title:string = 'Angular-tutorial';
   name:string = "Rishabh Kumar";
   profilenumber = signal<Number>(0);
+  randomNumber = signal<number>(Math.random());
 
   constructor()
   {
     effect(() => {
       console.log('Profile Number is:', this.profilenumber());
     });
+
+
   }
   moveToContactPage()
   {
     this.router.navigate(['/contact'],{queryParams:{phonenumber:9910561642}});
+  }
+  aboutclick()
+  {
+    this.router.navigate(['/about',this.randomNumber()])
   }
    
 
