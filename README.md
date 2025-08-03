@@ -1132,3 +1132,65 @@ Answer : ❌ Not directly – inputs are one-way
 Question : How does signal input help?
 
 Answer : Better reactivity, change detection, and type safety
+
+---
+### 🔁 Pass Data from Child to Parent using output()
+
+✅ Step 1: Create Child Component
+```
+ng g component child --standalone
+```
+✅ Step 2: Define output() Signal in Child Component
+```
+// child.component.ts
+import { Component, output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  standalone: true,
+  template: `
+    <button (click)="send()">Send to Parent</button>
+  `
+})
+export class ChildComponent {
+  message = 'Hey from Child!';
+
+  // ✅ new way: output() signal
+  messageSent = output<string>();
+
+  send() {
+    this.messageSent.emit(this.message);
+  }
+}
+```
+✅ Step 3: Use the Output in Parent Component
+```
+// parent.component.ts
+import { Component } from '@angular/core';
+import { ChildComponent } from './child.component';
+
+@Component({
+  selector: 'app-parent',
+  standalone: true,
+  imports: [ChildComponent],
+  template: `
+    <app-child (messageSent)="receiveMessage($event)"></app-child>
+    <p>Child says: {{ received }}</p>
+  `
+})
+export class ParentComponent {
+  received = '';
+
+  receiveMessage(data: string) {
+    this.received = data;
+  }
+}
+```
+✅ Summary of Key Concepts
+
+| Concept |   Explanation|
+| :---:   | :---: |
+|output()|New signal-based way to define outputs|
+|.emit()|Used to send data|
+|(messageSent)="..."|Parent listens to the child signal|
+|Signal-based Output|Cleaner, faster, and future-focused|
