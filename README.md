@@ -26,6 +26,9 @@
 - [✅ Form Grouping in Reactive Forms](#-form-grouping-in-reactive-forms)
 - [📌What is Template Driven Form?](#what-is-template-driven-form)
 - [📘 Pass Data Parent to Child Component](#-pass-data-parent-to-child-component)
+- [🔁 Pass Data from Child to Parent using output()](#-pass-data-from-child-to-parent-using-output)
+
+
 
 
 
