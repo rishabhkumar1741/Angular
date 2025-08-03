@@ -11,5 +11,15 @@ import { NgIf } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = "Rishabh's Angular App";
+  users = [
+    { name: 'John Doe', age: 30,id: 1 },
+    { name: 'Jane Smith', age: 25, id: 2 },
+    { name: 'Alice Johnson', age: 28, id: 3 },
+    { name: 'Bob Brown', age: 35, id: 4 },
+    { name: 'Charlie White', age: 22, id: 5 }
+  ];
+
+  remove(id :number){
+    this.users = this.users.filter(user => user.id !== id);
+  }
 }

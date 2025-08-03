@@ -27,6 +27,8 @@
 - [📌What is Template Driven Form?](#what-is-template-driven-form)
 - [📘 Pass Data Parent to Child Component](#-pass-data-parent-to-child-component)
 - [🔁 Pass Data from Child to Parent using output()](#-pass-data-from-child-to-parent-using-output)
+-  ✅ [What are Pipes in Angular?](#-what-are-pipes-in-angular)
+
 
 
 
@@ -1197,3 +1199,69 @@ export class ParentComponent {
 |.emit()|Used to send data|
 |(messageSent)="..."|Parent listens to the child signal|
 |Signal-based Output|Cleaner, faster, and future-focused|
+
+
+---
+### ✅ What are Pipes in Angular?
+
+Pipes in Angular are used to transform data in templates.
+They take input data and return transformed output without changing the original data.
+
+📦 Built-in Pipes Examples:
+
+| Pipe |   Usage Example| Description|
+| :---:   | :---: | :---: |
+|date | |
+|lowercase||
+|currency||
+|slice||
+
+🔧 Syntax:
+
+```
+{{ value | pipeName:arg1:arg2 }}
+```
+You can also chain pipes:
+```
+{{ name | lowercase | slice:0:5 }}
+```
+✨ Example:
+```
+<!-- Assume name = 'Rishabh' -->
+<p>{{ name | uppercase }}</p>  <!-- Output: RISHABH -->
+```
+
+🛠️ Custom Pipe in Angular
+1. Create Pipe
+
+You can use Angular CLI:
+``` ng generate pipe myCustom ```
+
+This creates:
+- my-custom.pipe.ts
+- my-custom.pipe.spec.ts
+
+### 2. Code Example: Custom Pipe
+
+👉 Task: Create a pipe to reverse a string.
+
+🔹 reverse.pipe.ts
+```
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'reverse'
+})
+export class ReversePipe implements PipeTransform {
+  transform(value: string): string {
+    return value.split('').reverse().join('');
+  }
+}
+```
+### 3. Use Pipe in Template
+
+In your component HTML:
+```
+<p>{{ 'Angular' | reverse }}</p>
+<!-- Output: ralugnA -->
+```

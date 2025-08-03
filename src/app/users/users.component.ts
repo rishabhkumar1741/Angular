@@ -1,4 +1,4 @@
-import { Component,input } from '@angular/core';
+import { Component,input, output } from '@angular/core';
 
 @Component({
   selector: 'app-users',
@@ -7,6 +7,11 @@ import { Component,input } from '@angular/core';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  title = input<string>();
+  users = input.required<{ name: string, age: number, id: number }[]>();
+  deleteuserid = output<number>();
+
+  deleteuser(userid:number){
+    this.deleteuserid.emit(userid);
+  }
 
 }
