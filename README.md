@@ -23,6 +23,8 @@
 - [📦 What are Observables and subscribe()](#-what-are-observables-and-subscribe-in-angular)
 - [🚦 Dynamic Routing](#-dynamic-routing-in-angular)
 - [📝 Angular Forms](#-angular-forms)
+- [✅ Form Grouping in Reactive Forms](#-form-grouping-in-reactive-forms)
+- [✅ What is Template Driven Forms](#what-is-template-driven-forms)
 
 
 
@@ -865,7 +867,7 @@ form = new FormGroup({
   <input formControlName="username" />
 </form>
 ```
-✅ Form Grouping in Reactive Forms
+## ✅ Form Grouping in Reactive Forms
 
 🔹 1. Why to use FormGroup?
   - Groups multiple form controls into one unit.
@@ -886,7 +888,10 @@ form = new FormGroup({
 
 In the component:
 ```
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl,ReactiveFormsModule } from '@angular/forms';
+
+- ts file  imports: [RouterOutlet,RouterLink,ReactiveFormsModule],
+
 
 userForm = new FormGroup({
   name: new FormControl(''),
@@ -976,3 +981,31 @@ if (this.userForm.valid) {
   // submit data
 }
 ```
+
+---
+### 📌 1. What is Template Driven Form?
+- Forms that are written in the HTML template.
+- Logic is handled using Angular directives like ngModel.
+- Mostly used for simple forms.
+- Needs to import FormsModule in app.module.ts.
+
+📌 2. How to Make Form and Input Fields
+```
+<form #userForm="ngForm" (ngSubmit)="submitForm(userForm)">
+  <input type="text" name="username" ngModel required />
+  <input type="email" name="email" ngModel />
+  <button type="submit">Submit</button>
+</form>
+```
+📌 3. How to Get Input Field Values
+```
+submitForm(form: NgForm) {
+  console.log(form.value); // Logs all form values as an object
+}
+```
+📌 4. Interview Questions (Examples)
+- Difference between Template Driven and Reactive Forms?
+- How is validation handled in Template Driven Forms?
+- What is ngModel?
+- Can we use two-way binding in forms?
+

@@ -14,4 +14,17 @@
         </li>
     </ul>
 
+    <form method="post" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <label for="name">Name :</label>
+        <input formControlName="name" id="name" type="text" >
+        <span *ngIf="name?.hasError('required')">name is required</span>
+        <span *ngIf="name?.errors?.['minlength']">name len must be greater then 3</span>
+
+        <hr>
+        <label for="marks">marks :</label>
+        <input formControlName="marks" id="marks" type="text" >
+        <button type="submit" >Submit</button>
+
+    </form>
+
 <router-outlet/>
