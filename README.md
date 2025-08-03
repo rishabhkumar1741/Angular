@@ -983,7 +983,7 @@ if (this.userForm.valid) {
 ```
 
 ---
-### 📌 1. What is Template Driven Form?
+### 📌What is Template Driven Form?
 - Forms that are written in the HTML template.
 - Logic is handled using Angular directives like ngModel.
 - Mostly used for simple forms.
