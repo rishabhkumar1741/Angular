@@ -1,6 +1,6 @@
 @for (user of users(); track user.id) {
   <div class="user">
-    <h2>Name: {{ user.name }}</h2>
+    <h2>Name: {{ user.name | nameconvert }} </h2>
     <p>Age: {{ user.age }}</p>
     <button (click)="deleteuser(user.id)" >Delete</button>
   </div>  

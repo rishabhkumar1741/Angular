@@ -1,8 +1,10 @@
 import { Component,input, output } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
+import {NameconvertPipe}  from '../pipes/nameconvert.pipe';
 
 @Component({
   selector: 'app-users',
-  imports: [],
+  imports: [UpperCasePipe,NameconvertPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
 })

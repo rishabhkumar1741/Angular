@@ -27,7 +27,9 @@
 - [📌What is Template Driven Form?](#what-is-template-driven-form)
 - [📘 Pass Data Parent to Child Component](#-pass-data-parent-to-child-component)
 - [🔁 Pass Data from Child to Parent using output()](#-pass-data-from-child-to-parent-using-output)
--  ✅ [What are Pipes in Angular?](#-what-are-pipes-in-angular)
+- ✅ [What are Pipes in Angular?](#-what-are-pipes-in-angular)
+- 🧬 [Angular Lifecycle Methods](#-angular-lifecycle-methods)
+
 
 
 
@@ -1226,7 +1228,21 @@ You can also chain pipes:
 {{ name | lowercase | slice:0:5 }}
 ```
 ✨ Example:
+
+ts
 ```
+import { UpperCasePipe } from '@angular/common';
+
+@Component({
+  selector: 'app-users',
+  imports: [UpperCasePipe],                     <== add
+  templateUrl: './users.component.html',       
+  styleUrl: './users.component.css'
+})
+```
+
+```
+HTML
 <!-- Assume name = 'Rishabh' -->
 <p>{{ name | uppercase }}</p>  <!-- Output: RISHABH -->
 ```
@@ -1265,3 +1281,56 @@ In your component HTML:
 <p>{{ 'Angular' | reverse }}</p>
 <!-- Output: ralugnA -->
 ```
+
+---
+### 🧬 Angular Lifecycle Methods
+
+📌 What are they?
+
+Lifecycle methods are special hooks (functions) Angular calls automatically at different stages of a component's life – from creation to destruction.
+
+🔁 Full Lifecycle Flow:
+```
+Constructor ➜ ngOnChanges ➜ ngOnInit ➜ ngDoCheck ➜ ngAfterContentInit ➜ 
+ngAfterContentChecked ➜ ngAfterViewInit ➜ ngAfterViewChecked ➜ ngOnDestroy
+```
+📚 Most Common Lifecycle Hooks
+1. ✅ constructor()
+
+    - Called first, when component is created.
+    - Good for dependency injection only.
+    ```
+    constructor(private service: DataService) {}
+    ```
+2. ✅ ngOnInit()
+- Called after constructor and after input values are set.
+- Best place for API calls, initialization.
+  ```
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+  ```
+3. ✅ ngOnChanges(changes: SimpleChanges)
+    - Called whenever an @Input() property changes.
+    ``` 
+    ngOnChanges(changes: SimpleChanges): void {
+      console.log('Input changed:', changes);
+    }
+    ```
+4. ✅ ngOnDestroy()
+    - Called just before the component is destroyed.
+    - Use for cleanup, like unsubscribing from Observables.
+    ```
+    ngOnDestroy(): void {
+      this.subscription.unsubscribe();
+    }
+      ```
+🔁 Other Advanced Hooks (less used but useful)
+| Hook |  Purpose| 
+| :---:   | :---: | 
+|ngDoCheck()	|Custom change detection|
+|ngAfterContentInit()|	After content (ng-content) is projected|
+|ngAfterContentChecked()	|After every check of projected content|
+|ngAfterViewInit()	| After component's view (and child views) initialized|
+|ngAfterViewChecked() |	After every check of the view|
+
