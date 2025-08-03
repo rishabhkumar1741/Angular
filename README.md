@@ -25,6 +25,8 @@
 - [📝 Angular Forms](#-angular-forms)
 - [✅ Form Grouping in Reactive Forms](#-form-grouping-in-reactive-forms)
 - [📌What is Template Driven Form?](#what-is-template-driven-form)
+- [📘 Pass Data Parent to Child Component](#-pass-data-parent-to-child-component)
+
 
 
 
@@ -1010,3 +1012,123 @@ submitForm(form: NgForm) {
 - What is ngModel?
 - Can we use two-way binding in forms?
 
+---
+## 📘 Pass Data Parent to Child Component
+✅ 1. Why We Pass Data from Parent to Child
+- To keep components independent and reusable.
+- Parent owns the main logic or data, child displays or acts on it.
+- Helps implement features like:
+  - Showing a selected item
+  - Toggling views
+  - Form inputs, dropdown values
+
+✅ 2. Create and Use a Child Component (Standalone Way)
+
+```
+ng generate component child --standalone
+```
+child.component.ts
+```
+import { Component, input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  standalone: true,
+  template: `<p>Received: {{ data() }}</p>`
+})
+export class ChildComponent {
+  data = input<string>();
+}
+```
+parent.component.html
+
+```
+<app-child [data]="'Hello Nayra 👋'"></app-child>
+```
+✅ 3. Pass Data from Parent to Child (New Way)
+- Use input() instead of @Input()
+
+- input() creates a signal, which auto-updates when the input changes.
+
+``` 
+// In child.component.ts
+name = input<string>();
+```
+```
+<!-- In parent.component.html -->
+<app-child [name]="'Rishabh Kumar'"></app-child>
+```
+```
+<!-- In child.component.html -->
+<p>Hi, {{ name() }}</p>
+```
+
+✅ 4. Pass Value with Dropdown Example
+
+parent.component.ts
+```
+fruits = ['Apple', 'Mango', 'Banana'];
+selectedFruit = 'Apple';
+```
+parent.component.html
+
+```
+<select [(ngModel)]="selectedFruit">
+  <option *ngFor="let fruit of fruits" [value]="fruit">{{ fruit }}</option>
+</select>
+
+<app-child [data]="selectedFruit"></app-child>
+```
+child.component.ts
+
+``` data = input<string>(); ```
+
+child.component.html
+
+``` <p>Selected Fruit: {{ data() }}</p>```
+
+✅ 5. Pass Multiple Values to Child
+
+parent.component.html
+
+```
+<app-child 
+  [name]="'Nayra'"
+  [age]="21"
+  [location]="'Delhi'">
+</app-child>
+```
+child.component.ts
+```
+name = input<string>();
+age = input<number>();
+location = input<string>();
+```
+child.component.html
+```
+<p>Name: {{ name() }}</p>
+<p>Age: {{ age() }}</p>
+<p>Location: {{ location() }}</p>
+```
+
+🎯 6. Interview Questions
+
+Question : Difference between @Input() and input()?
+
+Answer : input() is the new signal-based input method in Angular 17+
+
+Question : What does input() return?
+
+Answer : A writable signal
+
+Question : Can we pass complex types (object/array)?
+
+Answer : Yes
+
+Question : Can child component modify input data?
+
+Answer : ❌ Not directly – inputs are one-way
+
+Question : How does signal input help?
+
+Answer : Better reactivity, change detection, and type safety
