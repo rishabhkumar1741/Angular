@@ -29,6 +29,9 @@
 - [🔁 Pass Data from Child to Parent using output()](#-pass-data-from-child-to-parent-using-output)
 - ✅ [What are Pipes in Angular?](#-what-are-pipes-in-angular)
 - 🧬 [Angular Lifecycle Methods](#-angular-lifecycle-methods)
+- ⚙️ [Services in Angular](#️-services-in-angular)
+
+
 
 
 
@@ -1333,4 +1336,92 @@ ngAfterContentChecked ➜ ngAfterViewInit ➜ ngAfterViewChecked ➜ ngOnDestroy
 |ngAfterContentChecked()	|After every check of projected content|
 |ngAfterViewInit()	| After component's view (and child views) initialized|
 |ngAfterViewChecked() |	After every check of the view|
+
+---
+### ⚙️ Services in Angular
+
+📌 What is a Service?
+
+A Service in Angular is a class used to share logic, data, or functions between components.
+It helps in code reusability and keeping components clean.
+
+🔧 Why use Services?
+
+- ✅ To fetch data (like from APIs)
+- ✅ To share data between components
+- ✅ To handle business logic
+- ✅ To manage state or cache
+- ✅ To keep components focused only on UI
+
+✅ How to Create a Service
+
+#### 1. Generate using CLI
+
+bash
+```
+ng generate service user
+```
+This creates:
+- 📄 user.service.ts
+- 📄 user.service.spec.ts (for testing)
+
+#### 2. Basic Example: user.service.ts
+````
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'  // Automatically available app-wide
+})
+export class UserService {
+  getUsers() {
+    return ['Rishabh', 'Nayra', 'John'];
+  }
+}
+````
+#### 3. Using Service in Component
+a) Inject in constructor
+````
+import { Component } from '@angular/core';
+import { UserService } from './user.service';
+
+@Component({
+  selector: 'app-user',
+  template: `<p *ngFor="let user of users">{{ user }}</p>`
+})
+export class UserComponent {
+  users: string[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.users = this.userService.getUsers();
+  }
+}
+````
+🧠 @Injectable({ providedIn: 'root' }) – What is it?
+
+This tells Angular to create a single instance of the service and provide it globally (singleton).
+
+#### 🧪 Extra: Service with HTTP (API)
+
+````
+@Injectable({ providedIn: 'root' })
+export class ApiService {
+  constructor(private http: HttpClient) {}
+
+  getPosts() {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts');
+  }
+}
+````
+Then subscribe in the component:
+````
+this.apiService.getPosts().subscribe(data => {
+  console.log(data);
+});
+````
+
+
+
+
 
