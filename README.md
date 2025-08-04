@@ -30,6 +30,7 @@
 - ✅ [What are Pipes in Angular?](#-what-are-pipes-in-angular)
 - 🧬 [Angular Lifecycle Methods](#-angular-lifecycle-methods)
 - ⚙️ [Services in Angular](#️-services-in-angular)
+- ⚡ [Angular 17+ API Request Guide](#-angular-17-api-request-guide)
 
 
 
@@ -1420,6 +1421,8 @@ this.apiService.getPosts().subscribe(data => {
   console.log(data);
 });
 ````
+
+### ⚡ [Angular 17+ API Request Guide](#-angular-17-api-request-guide)
 
 
 
